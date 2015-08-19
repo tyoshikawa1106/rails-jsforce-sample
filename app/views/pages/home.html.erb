@@ -9,6 +9,7 @@
   $(document).ready(function(){
     console.log('-- Home --');
     jsforce.browser.on('connect', function(conn) {
+      console.log(conn);
       conn.query('SELECT Id, Name FROM User', function(err, res) {
         if (err) { return console.error(err); }
         console.log(res);
