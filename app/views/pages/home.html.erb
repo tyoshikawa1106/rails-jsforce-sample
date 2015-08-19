@@ -11,7 +11,7 @@
     console.log('-- Home --');
     jsforce.browser.on('connect', function(conn) {
       console.log(conn.userInfo);
-      conn.query('SELECT Id, Name FROM User WHERE Id = ' + conn.userInfo.id, function(err, res) {
+      conn.query('SELECT Id, Name FROM User WHERE Id = ' + '\'' + conn.userInfo.id + '\'', function(err, res) {
         if (err) { return console.error(err); }
         console.log(res);
       });
