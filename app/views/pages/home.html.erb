@@ -1,0 +1,13 @@
+<% content_for :scripts do %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    console.log('OK');
+    jsforce.browser.on('connect', function(conn) {
+      conn.query('SELECT Id, Name FROM Account', function(err, res) {
+        if (err) { return console.error(err); }
+        console.log(res);
+      });
+    });
+  });
+</script>
+<% end %>
