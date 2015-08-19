@@ -27,9 +27,11 @@
 
 <!-- JSforce -->
 <script>
-  jsforce.browser.init({
-    clientId: '3MVG9ZL0ppGP5UrBNnfv8GHjLw9ac.CX_Zko26PdUO6DZ_2Nd5YNn8Xg57RSDAXyYr3XBylQAesapT_1JtWdR',
-    redirectUri: 'https://tyoshikwa1106-jsforce-sample.herokuapp.com/connect'
+  $(document).ready(function(){
+    jsforce.browser.init({
+      clientId: '3MVG9ZL0ppGP5UrBNnfv8GHjLw9ac.CX_Zko26PdUO6DZ_2Nd5YNn8Xg57RSDAXyYr3XBylQAesapT_1JtWdR',
+      redirectUri: 'https://tyoshikwa1106-jsforce-sample.herokuapp.com/connect'
+    });
   });
 </script>
 

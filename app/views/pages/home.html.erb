@@ -1,9 +1,15 @@
+<div class="container">
+  <h1>
+    Hello! <span id="user-name">Yoshikawa</span> !!
+  </h1>
+</div>
+
 <% content_for :scripts do %>
 <script type="text/javascript">
   $(document).ready(function(){
-    console.log('OK');
+    console.log('-- Home --');
     jsforce.browser.on('connect', function(conn) {
-      conn.query('SELECT Id, Name FROM Account', function(err, res) {
+      conn.query('SELECT Id, Name FROM User', function(err, res) {
         if (err) { return console.error(err); }
         console.log(res);
       });
