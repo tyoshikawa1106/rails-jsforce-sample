@@ -5,16 +5,18 @@
 </div>
 
 <% content_for :scripts do %>
+
 <script type="text/javascript">
   $(document).ready(function(){
     console.log('-- Home --');
     jsforce.browser.on('connect', function(conn) {
-      console.log(conn);
-      conn.query('SELECT Id, Name FROM User', function(err, res) {
+      console.log(conn.UserInfo);
+      conn.query('SELECT Id, Name FROM User WHERE Id = ' + '\'' conn.UserInfo.id + '\'', function(err, res) {
         if (err) { return console.error(err); }
         console.log(res);
       });
     });
   });
 </script>
+
 <% end %>
