@@ -10,11 +10,15 @@
   $(document).ready(function(){
     console.log('-- Home --');
     jsforce.browser.on('connect', function(conn) {
-      console.log(conn.UserInfo);
+      console.log(conn.userInfo);
+      console.log(userInfo.id);
+      console.log(userInfo.name);
+      /*
       conn.query('SELECT Id, Name FROM User WHERE Id = ' + conn.UserInfo.id, function(err, res) {
         if (err) { return console.error(err); }
         console.log(res);
       });
+      */
     });
   });
 </script>
