@@ -15,7 +15,29 @@
 </head>
 <body>
 
-<%= yield %>
+<%= render 'header' %>
+
+<div style="min-height: 520px;">
+  <%= yield %>
+</div>
+
+<%= render 'footer' %>
+
+<%= yield :scripts %>
+
+<!-- JSforce -->
+<script>
+  jsforce.browser.init({
+    clientId: '3MVG9ZL0ppGP5UrBNnfv8GHjLw9ac.CX_Zko26PdUO6DZ_2Nd5YNn8Xg57RSDAXyYr3XBylQAesapT_1JtWdR',
+    redirectUri: 'http://localhost:3000/connect'
+  });
+  jsforce.browser.on('connect', function(conn) {
+    conn.query('SELECT Id, Name FROM Account', function(err, res) {
+      if (err) { return console.error(err); }
+      console.log(res);
+    });
+  });
+</script>
 
 </body>
 </html>
