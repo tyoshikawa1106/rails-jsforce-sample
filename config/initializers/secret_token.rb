@@ -9,4 +9,19 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-JsforceSampleApp::Application.config.secret_key_base = 'd9b7e254d1d64c77145a287baf16b759bf8ea1e8ad4137983604ff37dd14eb9001cb9dc54295febb569f89c9d72236616a0831d40c213571e75630bd27d97f42'
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+JsforceSampleApp::Application.config.secret_key_base = secure_token
