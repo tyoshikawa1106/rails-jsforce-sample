@@ -1,6 +1,6 @@
 <div class="container">
   <h1>
-    Hello! <span id="user-name" data-bind="foreach: user_name">Yoshikawa</span> !!
+    Hello! <span data-bind="text: userName"></span> !!
   </h1>
 </div>
 
@@ -8,25 +8,24 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
+    var self = this;
+    self.user_name = ko.observableArray([]);
+    console.log(self);
 
-    function HomeModel() {
-      var self = this;
-      self.user_name = ko.observableArray([]);
-      console.log(self);
+    jsforce.browser.on('connect', function(conn) {
+      var query = 'SELECT Id, Name FROM User WHERE Id = ' + '\'' + conn.userInfo.id + '\'' + ' LIMIT 1';
+      conn.query(query, function(err, res) {
+        if (err) {
+          return console.error(err);
+        }
 
-      jsforce.browser.on('connect', function(conn) {
-        var query = 'SELECT Id, Name FROM User WHERE Id = ' + '\'' + conn.userInfo.id + '\'' + ' LIMIT 1';
-        conn.query(query, function(err, res) {
-          if (err) {
-            return console.error(err);
-          }
-
-          console.log(res);
-        });
+        var homeViewModel = {
+          userName: res.Name
+        };
       });
-    };
+    });
 
-    ko.applyBindings(new HomeModel());
+    ko.applyBindings(new homeViewModel());
   });
 </script>
 
