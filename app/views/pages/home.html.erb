@@ -16,16 +16,13 @@
         if (err) {
           return console.error(err);
         }
-        console.log(res);
-        console.log(res.records[0]);
-        console.log(res.records[0].Name);
-        /*
+        
         var homeViewModel = {
-          userName: 'Yoshikawa' + '!!'
+          userName: res.records[0].Name + '!!'
         };
 
-        ko.applyBindings(new homeViewModel());
-        */
+        ko.applyBindings(homeViewModel);
+        
       });
     });
   });
