@@ -8,7 +8,7 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    var self = this;
+    console.log('-- Home --');
 
     jsforce.browser.on('connect', function(conn) {
       var query = 'SELECT Id, Name FROM User WHERE Id = ' + '\'' + conn.userInfo.id + '\'' + ' LIMIT 1';
