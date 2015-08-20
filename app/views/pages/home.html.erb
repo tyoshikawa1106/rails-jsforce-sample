@@ -17,8 +17,9 @@
           return console.error(err);
         }
         console.log(res);
+        console.log(res[0].Name);
         var homeViewModel = {
-          userName: res.Name
+          userName: 'Yoshikawa' + '!!'
         };
 
         ko.applyBindings(new homeViewModel());
