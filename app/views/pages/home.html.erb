@@ -9,8 +9,6 @@
 <script type="text/javascript">
   $(document).ready(function(){
     var self = this;
-    self.user_name = ko.observableArray([]);
-    console.log(self);
 
     jsforce.browser.on('connect', function(conn) {
       var query = 'SELECT Id, Name FROM User WHERE Id = ' + '\'' + conn.userInfo.id + '\'' + ' LIMIT 1';
@@ -18,14 +16,15 @@
         if (err) {
           return console.error(err);
         }
-
+        console.log(res.Name);
+        
         var homeViewModel = {
           userName: res.Name
         };
+
+        ko.applyBindings(new homeViewModel());
       });
     });
-
-    ko.applyBindings(new homeViewModel());
   });
 </script>
 
