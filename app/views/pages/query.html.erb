@@ -47,9 +47,11 @@
 
     var conn = jsforce.browser.on('connect', function(conn) {
       console.log('connect! = ' + conn.userInfo.id);
+      return conn;
     });
 
     console.log(conn);
+    console.log('connect!! = ' + conn.userInfo.id);
   });
 
   // View Model
