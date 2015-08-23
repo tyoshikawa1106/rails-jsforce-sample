@@ -61,12 +61,6 @@
   
     // SearchBtn
     self.clickSearchBtn = function() {
-
-      console.log('OK');
-
-      // Get Account
-      console.log('connect = ' + conn.userInfo.id);
-
       var query = 'SELECT Id,Name,AccountNumber FROM Account';
       if (self.searchKey) {
         query += ' WHERE Name LIKE ' + '\'' + self.searchKey + '%' + '\''
@@ -74,18 +68,12 @@
       query += ' ORDER BY Name ASC';
       query += ' LIMIT 200';
 
-      console.log(self.searchKey);
-      console.log(conn);
-
       conn.query(query, function(err, res) {
         if (err) {
           return console.error(err);
         }
-        
-        console.log('Query Go!');
 
-        console.log(res.records.length);
-        for (var i = 0; i < res.recoreds.length; i++) {
+        for (var i = 0; i < res.records.length; i++) {
           self.listItems.push({
              account_name: res.records[i].Name
             ,account_number: res.records[i].AccountNumber
