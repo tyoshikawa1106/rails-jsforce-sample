@@ -1,0 +1,82 @@
+<div class="query-page">
+  <!-- main -->
+  <div id="sb-site" class="main-color">
+    <%= render 'menu_header' %>
+
+    <div class="container">
+      <div style="margin-bottom: 50px;">
+        <h1 class="header-line">SOSL Search</h1>
+        <button type="button" class="btn btn-primary" data-bind="click: clickSearchBtn">Search</button>
+      </div>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody data-bind="foreach: listItems">
+          <tr>
+            <td>
+              <div data-bind="text: result_id"></div>
+            </td>
+            <td>
+              <div data-bind="text: result_name"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- sidebar -->
+  <%= render 'sidebar' %>
+</div>
+
+<% content_for :scripts do %>
+<script type="text/javascript">
+
+  var conn = null;
+
+  $(document).ready(function(){
+    // Slidebar
+    $.slidebars();
+
+    jsforce.browser.on('connect', function(c) {
+      conn = c;
+    });
+  });
+
+  // View Model
+  function viewModel() {
+    var self = this;
+    self.searchKey = '';
+    self.listItems = ko.observableArray([]);
+  
+    // SearchBtn
+    self.clickSearchBtn = function() {
+      self.listItems.removeAll();
+      var query = 'FIND {Un*} IN ALL FIELDS RETURNING Account(Id, Name), Lead(Id, Name)';
+
+      conn.search(query,
+        function(err, res) {
+          if (err) {
+            return console.error(err);
+          }
+          for (var i = 0; i < res.records.length; i++) {
+            self.listItems.push({
+               result_id: res.records[i].Name
+              ,result_name: res.records[i].AccountNumber
+            });  
+          }
+
+          ko.applyBindings(viewModel);
+        }
+      );
+    };
+
+  };
+
+  // Model
+  ko.applyBindings(new viewModel());
+</script>
+<% end %>

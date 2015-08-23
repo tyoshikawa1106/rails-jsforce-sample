@@ -10,4 +10,7 @@ class PagesController < ApplicationController
 
   def query
   end
+
+  def search
+  end
 end
