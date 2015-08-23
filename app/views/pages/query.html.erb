@@ -58,7 +58,7 @@
 
         // Get User
         jsforce.browser.on('connect', function(conn) {
-          var query = 'SELECT Id, Name FROM Account';
+          var query = 'SELECT Id,Name,AccountNumber FROM Account';
           if (self.searchKey) {
             //query += ' WHERE Name LIKE ' + '\'' + self.searchKey + '%' + '\''
           }
@@ -69,6 +69,7 @@
               return console.error(err);
             }
             
+            console.log(res.recoreds.length);
             for (var i = 0; i < res.recoreds.length; i++) {
               self.listItems.push({
                  account_name: res.records[i].Name
