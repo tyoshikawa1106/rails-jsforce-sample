@@ -61,6 +61,7 @@
   
     // SearchBtn
     self.clickSearchBtn = function() {
+      self.listItems.removeAll();
       var query = 'SELECT Id,Name,AccountNumber FROM Account';
       if (self.searchKey) {
         query += ' WHERE Name LIKE ' + '\'' + self.searchKey + '%' + '\''
