@@ -9,6 +9,7 @@
       <div style="margin-bottom: 20px;">
         <h1>Analytics</h1>
         <button type="button" class="btn btn-primary" data-bind="click: clickSearchBtn">Search</button>
+        <button type="button" class="btn btn-primary" data-bind="click: clickCreateBtn">Create</button>
       </div>
       <table class="table table-hover">
         <thead>
@@ -56,22 +57,31 @@
     // SearchBtn
     self.clickSearchBtn = function() {
       self.listItems.removeAll();
-      // get recent reports
-      conn.analytics.reports(function(err, reports) {
-        if (err) {
-          return console.error(err);
-        }
 
-        for (var i = 0; i < reports.length; i++) {
+      var body = { title: 'Get Account', num : 1 };
+      conn.apex.get("/Account/", body, function(err, res) {
+        if (err) { return console.error(err); }
+        console.log("response: ", res);
+
+        for (var i = 0; i < res.length; i++) {
           self.listItems.push({
-             result_id: reports[i].id
-            ,result_name: reports[i].name
+             result_id: res[i].id
+            ,result_name: res[i].name
           });  
         }
 
         ko.applyBindings(viewModel);
       });
     };
+
+    // CreateBtn
+    self.clickCreateBtn = function() {
+      var body = { title: 'Create Account', num : 1 };
+      conn.apex.post("/Account/", body, function(err, res) {
+        if (err) { return console.error(err); }
+        console.log("response: ", res);
+      });
+    });
   };
 
   // Model
