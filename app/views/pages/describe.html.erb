@@ -4,7 +4,11 @@
     <%= render 'menu_header' %>
 
     <div class="container">
-      <h1>Describe</h1>
+      <div style="margin-bottom: 50px;">
+        <h1>Describe</h1>
+        <button type="button" class="btn btn-primary" data-bind="click: clickSearchBtn">Search</button>
+      </div>
+      <button type="button" class="btn btn-primary" data-bind="click: clickSearchBtn">Search</button>
       <table class="table table-hover">
         <thead>
           <tr>
@@ -43,24 +47,25 @@
   // View Model
   function viewModel() {
     var self = this;
-    self.searchKey = '';
     self.listItems = ko.observableArray([]);
   
     // SearchBtn
-    self.listItems.removeAll();
-    conn.sobject("Account").describe(function(err, meta) {
-      if (err) {
-        return console.error(err);
-      }
-      console.log(meta.fields);
-      for (var i = 0; i < meta.fields; i++) {
-        self.listItems.push({
-           meta_label: meta.fields[i].label
-        });  
-      }
+    self.clickSearchBtn = function() {
+      self.listItems.removeAll();
+      conn.sobject("Account").describe(function(err, meta) {
+        if (err) {
+          return console.error(err);
+        }
+        console.log(meta.fields);
+        for (var i = 0; i < meta.fields; i++) {
+          self.listItems.push({
+             meta_label: meta.fields[i].label
+          });  
+        }
 
-      ko.applyBindings(viewModel);
-    });
+        ko.applyBindings(viewModel);
+      });
+    };
   };
 
   // Model
