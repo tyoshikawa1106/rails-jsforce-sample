@@ -3,6 +3,7 @@ JsforceSampleApp::Application.routes.draw do
   match '/home', to: 'pages#home', via: 'get'
   match '/query', to: 'pages#query', via: 'get'
   match '/search', to: 'pages#search', via: 'get'
+  match '/describe', to: 'pages#describe', via: 'get'
   root "pages#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
