@@ -56,9 +56,29 @@
       // SearchBtn
       self.clickSearchBtn = function() {
 
-        console.log(self.searchKey);
+        // Get User
+        jsforce.browser.on('connect', function(conn) {
+          var query = 'SELECT Id, Name FROM Account';
+          if (self.searchKey) {
+            //query += ' WHERE Name LIKE ' + '\'' + self.searchKey + '%' + '\''
+          }
+          query += ' ORDER BY Name ASC';
+          query += ' LIMIT 200';
+          conn.query(query, function(err, res) {
+            if (err) {
+              return console.error(err);
+            }
+            
+            for (var i = 0; i < res.length; i++) {
+              self.listItems.push({
+                 account_name: res.records[i].Name
+                ,account_number: res.records[i].AccountNumber
+              });  
+            }
 
-        self.listItems.push({account_name:'Account',account_number:'A-001'});
+            ko.applyBindings(viewModel);
+          });
+        });
       };
 
     };
