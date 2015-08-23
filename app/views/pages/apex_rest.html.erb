@@ -60,7 +60,10 @@
 
       var body = { title: 'Get Account', num : 1 };
       conn.apex.get("/Account/", body, function(err, res) {
-        if (err) { return console.error(err); }
+        if (err) {
+          swal('ERROR!', err, 'error');
+          return false;
+        }
         console.log("response: ", res);
 
         for (var i = 0; i < res.length; i++) {
@@ -79,18 +82,12 @@
       // body payload structure is depending to the Apex REST method interface.
       var body = { title: 'hello', num : 1 };
       conn.apex.post("/Account/", body, function(err, res) {
-        if (err) { return console.error(err); }
+        if (err) {
+          swal('ERROR!', err, 'error');
+          return false;
+        }
         console.log("response: ", res);
-        // the response object structure depends on the definition of apex class
       });
-      /*
-      var body = { title: 'Create Account', num : 1 };
-      conn.apex.post("/Account/", body, function(err, res) {
-        if (err) { return console.error(err); }
-        console.log("response: ", res);
-        alert(res[0].Name);
-      });
-      */
     };
   };
 
