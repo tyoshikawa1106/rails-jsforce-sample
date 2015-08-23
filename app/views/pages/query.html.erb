@@ -41,56 +41,60 @@
 
 <% content_for :scripts do %>
 <script type="text/javascript">
-    $(document).ready(function(){
-      // Slidebar
-      $.slidebars();
+  $(document).ready(function(){
+    // Slidebar
+    $.slidebars();
+
+    jsforce.browser.on('connect', function(conn) {
+      console.log('connect! = ' + conn.userInfo.id);
     });
+  });
 
-    // View Model
-    function viewModel() {
-      var self = this;
-      self.searchKey = '';
-      self.listItems = ko.observableArray([]);
-    
-      // SearchBtn
-      self.clickSearchBtn = function() {
+  // View Model
+  function viewModel() {
+    var self = this;
+    self.searchKey = '';
+    self.listItems = ko.observableArray([]);
+  
+    // SearchBtn
+    self.clickSearchBtn = function() {
 
-        console.log('OK');
+      console.log('OK');
 
-        // Get Account
-        jsforce.browser.on('connect', function(conn) {
-          console.log('connect = ' + conn.userInfo.id);
+      // Get Account
+      jsforce.browser.on('connect', function(conn) {
+        console.log('connect = ' + conn.userInfo.id);
 
-          var query = 'SELECT Id,Name,AccountNumber FROM Account';
-          //if (self.searchKey) {
-            //query += ' WHERE Name LIKE ' + '\'' + self.searchKey + '%' + '\''
-          //}
-          query += ' ORDER BY Name ASC';
-          query += ' LIMIT 200';
+        var query = 'SELECT Id,Name,AccountNumber FROM Account';
+        //if (self.searchKey) {
+          //query += ' WHERE Name LIKE ' + '\'' + self.searchKey + '%' + '\''
+        //}
+        query += ' ORDER BY Name ASC';
+        query += ' LIMIT 200';
 
-          console.log(query);
+        console.log(query);
 
-          conn.query(query, function(err, res) {
-            if (err) {
-              return console.error(err);
-            }
-            
-            console.log(res.recoreds.length);
-            for (var i = 0; i < res.recoreds.length; i++) {
-              self.listItems.push({
-                 account_name: res.records[i].Name
-                ,account_number: res.records[i].AccountNumber
-              });  
-            }
+        conn.query(query, function(err, res) {
+          if (err) {
+            return console.error(err);
+          }
+          
+          console.log(res.recoreds.length);
+          for (var i = 0; i < res.recoreds.length; i++) {
+            self.listItems.push({
+               account_name: res.records[i].Name
+              ,account_number: res.records[i].AccountNumber
+            });  
+          }
 
-            ko.applyBindings(viewModel);
-          });
+          ko.applyBindings(viewModel);
         });
-      };
-
+      });
     };
 
-    // Model
-    ko.applyBindings(new viewModel());
+  };
+
+  // Model
+  ko.applyBindings(new viewModel());
 </script>
 <% end %>

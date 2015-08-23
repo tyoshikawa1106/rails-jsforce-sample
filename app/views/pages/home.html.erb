@@ -18,30 +18,28 @@
 
 <% content_for :scripts do %>
 <script type="text/javascript">
-  
-    $(document).ready(function(){
-      // Slidebar
-      $.slidebars();
+  $(document).ready(function(){
+    // Slidebar
+    $.slidebars();
 
-      // Get User
-      jsforce.browser.on('connect', function(conn) {
+    // Get User
+    jsforce.browser.on('connect', function(conn) {
 
-        console.log('connect! = ' + conn.userInfo.id);
+      console.log('connect! = ' + conn.userInfo.id);
 
-        var query = 'SELECT Id, Name FROM User WHERE Id = ' + '\'' + conn.userInfo.id + '\'' + ' LIMIT 1';
-        conn.query(query, function(err, res) {
-          if (err) {
-            return console.error(err);
-          }
-          
-          var homeViewModel = {
-            userName: res.records[0].Name + '!!'
-          };
+      var query = 'SELECT Id, Name FROM User WHERE Id = ' + '\'' + conn.userInfo.id + '\'' + ' LIMIT 1';
+      conn.query(query, function(err, res) {
+        if (err) {
+          return console.error(err);
+        }
+        
+        var viewModel = {
+          userName: res.records[0].Name + '!!'
+        };
 
-          ko.applyBindings(homeViewModel);
-        });
+        ko.applyBindings(viewModel);
       });
     });
-  
+  });
 </script>
 <% end %>
