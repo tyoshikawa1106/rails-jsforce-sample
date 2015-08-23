@@ -58,9 +58,9 @@
 
         console.log('OK');
 
-        // Get User
+        // Get Account
         jsforce.browser.on('connect', function(conn) {
-          console.log('connect');
+          console.log('connect = ' + conn.userInfo.id);
 
           var query = 'SELECT Id,Name,AccountNumber FROM Account';
           //if (self.searchKey) {

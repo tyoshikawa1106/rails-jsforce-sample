@@ -25,6 +25,9 @@
 
       // Get User
       jsforce.browser.on('connect', function(conn) {
+
+        console.log('connect! = ' + conn.userInfo.id);
+
         var query = 'SELECT Id, Name FROM User WHERE Id = ' + '\'' + conn.userInfo.id + '\'' + ' LIMIT 1';
         conn.query(query, function(err, res) {
           if (err) {
