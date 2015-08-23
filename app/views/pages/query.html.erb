@@ -45,9 +45,11 @@
     // Slidebar
     $.slidebars();
 
-    jsforce.browser.on('connect', function(conn) {
+    var conn = jsforce.browser.on('connect', function(conn) {
       console.log('connect! = ' + conn.userInfo.id);
     });
+
+    console.log(conn);
   });
 
   // View Model
