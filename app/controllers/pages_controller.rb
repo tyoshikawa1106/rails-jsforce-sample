@@ -16,4 +16,7 @@ class PagesController < ApplicationController
 
   def analytics
   end
+
+  def apex_rest
+  end
 end

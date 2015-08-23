@@ -5,6 +5,7 @@ JsforceSampleApp::Application.routes.draw do
   match '/search', to: 'pages#search', via: 'get'
   match '/describe', to: 'pages#describe', via: 'get'
   match '/analytics', to: 'pages#analytics', via: 'get'
+  match '/apex_rest', to: 'pages#apex_rest', via: 'get'
   root "pages#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
