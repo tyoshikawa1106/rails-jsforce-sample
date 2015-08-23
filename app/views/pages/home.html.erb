@@ -18,27 +18,34 @@
 
 <% content_for :scripts do %>
 <script type="text/javascript">
+
+  var conn = null;
+
   $(document).ready(function(){
     // Slidebar
     $.slidebars();
 
     // Get User
-    jsforce.browser.on('connect', function(conn) {
+    jsforce.browser.on('connect', function(c) {
 
-      console.log('connect! = ' + conn.userInfo.id);
+      conn = c;
 
-      var query = 'SELECT Id, Name FROM User WHERE Id = ' + '\'' + conn.userInfo.id + '\'' + ' LIMIT 1';
-      conn.query(query, function(err, res) {
-        if (err) {
-          return console.error(err);
-        }
-        
-        var viewModel = {
-          userName: res.records[0].Name + '!!'
-        };
+      if (conn.userInfo.id) {
+        var query = 'SELECT Id, Name FROM User WHERE Id = ' + '\'' + conn.userInfo.id + '\'' + ' LIMIT 1';
+        conn.query(query, function(err, res) {
+          if (err) {
+            return console.error(err);
+          }
+          
+          var viewModel = {
+            userName: res.records[0].Name + '!!'
+          };
 
-        ko.applyBindings(viewModel);
-      });
+          ko.applyBindings(viewModel);
+        });
+      } else {
+        alert('Please Salesforce Connece.');
+      }
     });
   });
 </script>
