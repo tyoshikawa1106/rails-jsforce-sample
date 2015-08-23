@@ -41,17 +41,16 @@
 
 <% content_for :scripts do %>
 <script type="text/javascript">
+
+  var conn;
+
   $(document).ready(function(){
     // Slidebar
     $.slidebars();
 
-    var conn = jsforce.browser.on('connect', function(conn) {
-      console.log('connect! = ' + conn.userInfo.id);
-      return conn;
+    jsforce.browser.on('connect', function(c) {
+      conn = c;
     });
-
-    console.log(conn);
-    console.log('connect!!');
   });
 
   // View Model
@@ -66,7 +65,6 @@
       console.log('OK');
 
       // Get Account
-      jsforce.browser.on('connect', function(conn) {
         console.log('connect = ' + conn.userInfo.id);
 
         var query = 'SELECT Id,Name,AccountNumber FROM Account';
@@ -92,7 +90,6 @@
           }
 
           ko.applyBindings(viewModel);
-        });
       });
     };
 
