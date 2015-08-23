@@ -67,7 +67,8 @@
       conn.search(query,
         function(err, res) {
           if (err) {
-            return console.error(err);
+            swal('ERROR!', err, 'error');
+            return false;
           }
           for (var i = 0; i < res.length; i++) {
             self.listItems.push({

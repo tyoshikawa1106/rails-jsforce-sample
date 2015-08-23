@@ -32,22 +32,19 @@
 
       conn = c;
 
-      if (conn.userInfo.id) {
-        var query = 'SELECT Id, Name FROM User WHERE Id = ' + '\'' + conn.userInfo.id + '\'' + ' LIMIT 1';
-        conn.query(query, function(err, res) {
-          if (err) {
-            return console.error(err);
-          }
-          
-          var viewModel = {
-            userName: res.records[0].Name + '!!'
-          };
+      var query = 'SELECT Id, Name FROM User WHERE Id = ' + '\'' + conn.userInfo.id + '\'' + ' LIMIT 1';
+      conn.query(query, function(err, res) {
+        if (err) {
+          swal('ERROR!', err, 'error');
+          return false;
+        }
+        
+        var viewModel = {
+          userName: res.records[0].Name + '!!'
+        };
 
-          ko.applyBindings(viewModel);
-        });
-      } else {
-        alert('Please Salesforce Connece.');
-      }
+        ko.applyBindings(viewModel);
+      });
     });
   });
 </script>

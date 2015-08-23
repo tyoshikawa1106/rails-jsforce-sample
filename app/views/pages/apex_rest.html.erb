@@ -7,7 +7,7 @@
 
     <div class="container">
       <div style="margin-bottom: 20px;">
-        <h1>Apex REST (検証中...)</h1>
+        <h1>Apex REST (Debug...)</h1>
         <button type="button" class="btn btn-primary" data-bind="click: clickSearchBtn">Search</button>
         <button type="button" class="btn btn-primary" data-bind="click: clickCreateBtn">Create</button>
       </div>
@@ -80,7 +80,7 @@
     // CreateBtn
     self.clickCreateBtn = function() {
       // body payload structure is depending to the Apex REST method interface.
-      var body = { title: 'hello', num : 1 };
+      var body = { title: 'Create Account', num : 1 };
       conn.apex.post("/Account/", body, function(err, res) {
         if (err) {
           swal('ERROR!', err, 'error');

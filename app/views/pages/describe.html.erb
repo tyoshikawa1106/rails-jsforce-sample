@@ -62,10 +62,9 @@
       self.listItems.removeAll();
       conn.sobject("Account").describe(function(err, meta) {
         if (err) {
-          return console.error(err);
+          swal('ERROR!', err, 'error');
+          return false;
         }
-        console.log(meta.fields);
-        console.log(meta.fields[0].label);
 
         for (var i = 0; i < meta.fields.length; i++) {
           self.listItems.push({

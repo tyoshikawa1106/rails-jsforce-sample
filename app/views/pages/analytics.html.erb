@@ -59,7 +59,8 @@
       // get recent reports
       conn.analytics.reports(function(err, reports) {
         if (err) {
-          return console.error(err);
+          swal('ERROR!', err, 'error');
+          return false;
         }
 
         for (var i = 0; i < reports.length; i++) {
