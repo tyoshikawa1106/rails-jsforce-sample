@@ -58,12 +58,17 @@
 
         // Get User
         jsforce.browser.on('connect', function(conn) {
+          console.log('OK');
+
           var query = 'SELECT Id,Name,AccountNumber FROM Account';
           if (self.searchKey) {
             //query += ' WHERE Name LIKE ' + '\'' + self.searchKey + '%' + '\''
           }
           query += ' ORDER BY Name ASC';
           query += ' LIMIT 200';
+
+          console.log(query);
+
           conn.query(query, function(err, res) {
             if (err) {
               return console.error(err);
