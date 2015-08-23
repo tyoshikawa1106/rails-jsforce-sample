@@ -1,11 +1,38 @@
 <div class="query-page">
   <!-- main -->
-  <div id="sb-site" style="background-color: #f0f1f2;">
+  <div id="sb-site" class="main-color">
     <%= render 'menu_header' %>
+
     <div class="container">
-      <h1>
-        Query! <span data-bind="text: userName"></span>
-      </h1>
+      <div style="margin-bottom: 50px;">
+        <fieldset>
+          <h1 class="header-line">Account Search</h1>
+          <div class="form-group">
+            <label>Account Name</label>
+            <input type="text" class="form-control" data-bind="value:searchKey"></input>
+          </div>
+        </fieldset>
+        <button type="button" class="btn btn-primary" data-bind="click: clickSearchBtn">Search</button>
+      </div>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Account Number</th>
+          </tr>
+        </thead>
+        <tbody data-bind="foreach: listItems">
+          <tr>
+            <td>
+              <div data-bind="text: account_name"></div>
+            </td>
+            <td>
+              <div data-bind="text: account_number"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <!-- sidebar -->
@@ -14,11 +41,31 @@
 
 <% content_for :scripts do %>
 <script type="text/javascript">
-(function($) {
-  $(document).ready(function(){
-    // Slidebar
-    $.slidebars();
-  });
-}) (jQuery);
+  (function($) {
+    $(document).ready(function(){
+      // Slidebar
+      $.slidebars();
+    });
+
+    // View Model
+    function viewModel() {
+      var self = this;
+      self.searchKey = '';
+      self.listItems = ko.observableArray([]);
+    
+      // SearchBtn
+      self.clickSearchBtn = function() {
+
+        console.log(self.searchKey);
+
+        self.listItems.push({account_name:'Account',account_number:'A-001'});
+      };
+
+    };
+
+    // Model
+    ko.applyBindings(new viewModel());
+
+  }) (jQuery);
 </script>
 <% end %>
