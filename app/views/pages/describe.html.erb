@@ -19,6 +19,12 @@
             <td>
               <div data-bind="text: meta_label"></div>
             </td>
+            <td>
+              <div data-bind="text: meta_name"></div>
+            </td>
+            <td>
+              <div data-bind="text: meta_type"></div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -56,11 +62,12 @@
         }
         console.log(meta.fields);
         console.log(meta.fields[0].label);
-        console.log(meta.fields[0].Object.label);
 
         for (var i = 0; i < meta.fields.length; i++) {
           self.listItems.push({
-            meta_label: meta.fields[i].Object.label
+             meta_label: meta.fields[i].label
+            ,meta_name: meta.fields[i].name
+            ,meta_type: meta.fields[i].type
           });  
         }
 
