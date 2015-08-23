@@ -13,4 +13,7 @@ class PagesController < ApplicationController
 
   def search
   end
+
+  def analytics
+  end
 end
