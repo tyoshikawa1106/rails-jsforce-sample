@@ -68,13 +68,14 @@
       console.log('connect = ' + conn.userInfo.id);
 
       var query = 'SELECT Id,Name,AccountNumber FROM Account';
-      //if (self.searchKey) {
-        //query += ' WHERE Name LIKE ' + '\'' + self.searchKey + '%' + '\''
-      //}
+      if (self.searchKey) {
+        query += ' WHERE Name LIKE ' + '\'' + self.searchKey + '%' + '\''
+      }
       query += ' ORDER BY Name ASC';
       query += ' LIMIT 200';
 
-      console.log(query);
+      console.log(self.searchKey);
+      console.log(conn);
 
       conn.query(query, function(err, res) {
         if (err) {
