@@ -47,22 +47,19 @@
     self.listItems = ko.observableArray([]);
   
     // SearchBtn
-    self.clickSearchBtn = function() {
-      self.listItems.removeAll();
-      conn.sobject("Account").describe(function(err, meta) {
-        if (err) {
-          return console.error(err);
-        }
-        for (var i = 0; i < res.length; i++) {
-          self.listItems.push({
-             meta_label: meta.label
-          });  
-        }
+    self.listItems.removeAll();
+    conn.sobject("Account").describe(function(err, meta) {
+      if (err) {
+        return console.error(err);
+      }
+      for (var i = 0; i < res.length; i++) {
+        self.listItems.push({
+           meta_label: meta.label
+        });  
+      }
 
-        ko.applyBindings(viewModel);
-      );
-    };
-
+      ko.applyBindings(viewModel);
+    );
   };
 
   // Model
