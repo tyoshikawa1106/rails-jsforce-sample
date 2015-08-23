@@ -80,8 +80,9 @@
       conn.apex.post("/Account/", body, function(err, res) {
         if (err) { return console.error(err); }
         console.log("response: ", res);
+        alert(res[0].Name);
       });
-    });
+    };
   };
 
   // Model
