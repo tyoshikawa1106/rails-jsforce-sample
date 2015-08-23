@@ -52,9 +52,10 @@
       if (err) {
         return console.error(err);
       }
-      for (var i = 0; i < res.length; i++) {
+      console.log(meta.fields);
+      for (var i = 0; i < meta.fields; i++) {
         self.listItems.push({
-           meta_label: meta.label
+           meta_label: meta.fields[i].label
         });  
       }
 
