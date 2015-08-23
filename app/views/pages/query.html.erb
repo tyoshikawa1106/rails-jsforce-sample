@@ -56,14 +56,16 @@
       // SearchBtn
       self.clickSearchBtn = function() {
 
+        console.log('OK');
+
         // Get User
         jsforce.browser.on('connect', function(conn) {
-          console.log('OK');
+          console.log('connect');
 
           var query = 'SELECT Id,Name,AccountNumber FROM Account';
-          if (self.searchKey) {
+          //if (self.searchKey) {
             //query += ' WHERE Name LIKE ' + '\'' + self.searchKey + '%' + '\''
-          }
+          //}
           query += ' ORDER BY Name ASC';
           query += ' LIMIT 200';
 
