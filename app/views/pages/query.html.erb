@@ -1,0 +1,24 @@
+<div class="query-page">
+  <!-- main -->
+  <div id="sb-site" style="background-color: #f0f1f2;">
+    <%= render 'menu_header' %>
+    <div class="container">
+      <h1>
+        Query! <span data-bind="text: userName"></span>
+      </h1>
+    </div>
+  </div>
+  <!-- sidebar -->
+  <%= render 'sidebar' %>
+</div>
+
+<% content_for :scripts do %>
+<script type="text/javascript">
+(function($) {
+  $(document).ready(function(){
+    // Slidebar
+    $.slidebars();
+  });
+}) (jQuery);
+</script>
+<% end %>

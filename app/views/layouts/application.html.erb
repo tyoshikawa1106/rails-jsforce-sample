@@ -1,41 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>JsforceSampleApp</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-  <!-- JSforce -->
-  <%= javascript_include_tag "jsforce/jsforce.min.js" %>
-  <!-- bootstrap sf1 -->
-  <%= javascript_include_tag "bootstrap-sf1/js/docs.js" %>
-  <%= stylesheet_link_tag "bootstrap-sf1/dist/css/bootstrap.min.css" %>
-  <%= stylesheet_link_tag "bootstrap-sf1/dist/css/docs.min.css" %>
-  <!-- KnockoutJs -->
-  <%= javascript_include_tag "knockoutjs/knockout-3.3.0.js" %>
-  <style>pre code { background: transparent; }</style>
-</head>
-<body>
+  <head>
+    <title>JsforceSampleApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
 
-<%= render 'header' %>
+    <!-- JSforce -->
+    <%= javascript_include_tag "jsforce/jsforce.min.js" %>
+    <!-- bootstrap sf1 -->
+    <%= javascript_include_tag "bootstrap-sf1/js/docs.js" %>
+    <%= stylesheet_link_tag "bootstrap-sf1/dist/css/bootstrap.min.css" %>
+    <%= stylesheet_link_tag "bootstrap-sf1/dist/css/docs.min.css" %>
+    <!-- KnockoutJs -->
+    <%= javascript_include_tag "knockoutjs/knockout-3.3.0.js" %>
+    <!-- Slidebars -->
+    <%= stylesheet_link_tag "slidebars/slidebars.min.css" %>
+    <%= javascript_include_tag "slidebars/slidebars.min.js" %>
 
-<div style="min-height: 520px;">
-  <%= yield %>
-</div>
-
-<%= render 'footer' %>
-
-<%= yield :scripts %>
-
-<!-- JSforce -->
-<script>
-  $(document).ready(function(){
-    jsforce.browser.init({
-      clientId: '3MVG9ZL0ppGP5UrBNnfv8GHjLw9ac.CX_Zko26PdUO6DZ_2Nd5YNn8Xg57RSDAXyYr3XBylQAesapT_1JtWdR',
-      redirectUri: 'https://tyoshikwa1106-jsforce-sample.herokuapp.com/connect'
-    });
-  });
-</script>
-
-</body>
+    <style>pre code { background: transparent; }</style>
+    <!-- library -->
+    <%= yield :library %>
+  </head>
+  <body>
+    <!-- header -->
+    <%= render 'header' %>
+    <!-- containt -->
+    <div style="min-height: 520px;">
+      <%= yield %>
+    </div>
+    <!-- footer -->
+    <%= render 'footer' %>
+    <!-- add javascript -->
+    <%= yield :scripts %>
+    <!-- JSforce -->
+    <script type="text/javascript">
+      (function($) {
+        $(document).ready(function(){
+          jsforce.browser.init({
+            clientId: '3MVG9ZL0ppGP5UrBNnfv8GHjLw9ac.CX_Zko26PdUO6DZ_2Nd5YNn8Xg57RSDAXyYr3XBylQAesapT_1JtWdR',
+            redirectUri: 'https://tyoshikwa1106-jsforce-sample.herokuapp.com/connect'
+          });
+        });
+      });
+    </script>
+  </body>
 </html>

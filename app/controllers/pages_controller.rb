@@ -7,4 +7,7 @@ class PagesController < ApplicationController
 
   def home
   end
+
+  def query
+  end
 end
