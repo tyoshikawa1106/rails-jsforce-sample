@@ -62,10 +62,10 @@
           if (err) {
             return console.error(err);
           }
-          for (var i = 0; i < res.records.length; i++) {
+          for (var i = 0; i < res.length; i++) {
             self.listItems.push({
-               result_id: res.records[i].Name
-              ,result_name: res.records[i].AccountNumber
+               result_id: res[i].Name
+              ,result_name: res[i].AccountNumber
             });  
           }
 
