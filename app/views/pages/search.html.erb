@@ -60,7 +60,7 @@
     // SearchBtn
     self.clickSearchBtn = function() {
       self.listItems.removeAll();
-      var query = 'FIND {Un*} IN ALL FIELDS RETURNING Opportunity(Id, Name), Account(Id, Name)';
+      var query = 'FIND {Un*} IN ALL FIELDS RETURNING Opportunity(Id, Name LIMIT 20), Account(Id, Name LIMIT 20) LIMIT 200';
 
       conn.search(query,
         function(err, res) {
