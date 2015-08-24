@@ -82,12 +82,22 @@
           if (rets[i].success) {
             swal('Create!', 'Created record id : ' + rets[i].id, 'success');
             console.log(rets[i]);
-            self.listItems.push({
-               account_id: rets[i].id
-              ,account_name: rets[i].Name
-              ,account_number: ''
+
+            // Single record retrieval
+            conn.sobject("Account").retrieve(rets[i].id, function(err, account) {
+              if (err) {
+                swal('ERROR!', err, 'error');
+                return false;
+              }
+
+              console.log(account);
+
+              self.listItems.push({
+                 account_id: account.id
+                ,account_name: account.Name
+                ,account_number: account.AccountNuber
+              });
             });
-            return false;
           }
         }
       });
