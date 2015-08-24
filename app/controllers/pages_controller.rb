@@ -22,4 +22,7 @@ class PagesController < ApplicationController
 
   def apex_rest
   end
+
+  def logout
+  end
 end
