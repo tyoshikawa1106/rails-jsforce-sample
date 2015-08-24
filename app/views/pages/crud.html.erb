@@ -114,7 +114,15 @@
       // DeleteBtn
       self.clickDeleteBtn = function(record) {
         console.log(record);
-        swall(record.account_id);
+        // Single record deletion
+        conn.sobject("Account").destroy(record.account_id, function(err, ret) {
+          if (err || !ret.success) {
+            swal('ERROR!', err, 'error');
+            return false;
+          }
+          console.log('Deleted Successfully : ' + ret.id);
+        });
+        swall('Delete!');
       }
     };
 
