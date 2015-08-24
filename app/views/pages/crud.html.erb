@@ -61,6 +61,32 @@
     var self = this;
     self.input_account_name = '';
     self.listItems = ko.observableArray([]);
+
+
+    // SearchBtn
+    self.clickSearchBtn = function() {
+
+      if (!self.input_account_name) {
+        swal('Warning', 'Please Account Name...', 'warning');
+      }
+
+      // Multiple records creation
+      conn.sobject('Account').create([
+        { Name : self.input_account_name }
+      ],
+      function(err, rets) {
+        if (err) {
+          swal('ERROR!', err, 'error');
+          return false;
+        }
+        for (var i=0; i < rets.length; i++) {
+          if (rets[i].success) {
+            swal('Create!', 'Created record id : ' + rets[i].id, 'success');
+            return false;
+          }
+        }
+      });
+    };
   
     // SearchBtn
     self.clickSearchBtn = function() {
