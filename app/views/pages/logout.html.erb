@@ -8,7 +8,7 @@
     <div class="container">
       <div style="margin-bottom: 20px;">
         <h1 class="header-line">Salesforce Connection Logout</h1>
-        <button type="button" class="btn btn-primary" data-bind="click: clickLogoutBtn">Logout</button>
+        <button type="button" class="btn btn-primary" onclick="if(confirm('Logout ?'))jsforce.browser.logout()">Logout</button>
       </div>
     </div>
   </div>
@@ -29,25 +29,5 @@
       conn = c;
     });
   });
-
-  // View Model
-  function viewModel() {
-    var self = this;
-  
-    // LogoutBtn
-    self.clickLogoutBtn = function() {
-      conn.logout(function(err) {
-        if (err) {
-          swal('ERROR!', err, 'error');
-          return false;
-        }
-
-        swal('Logout!');
-      });
-    };
-  };
-
-  // Model
-  ko.applyBindings(new viewModel());
 </script>
 <% end %>
