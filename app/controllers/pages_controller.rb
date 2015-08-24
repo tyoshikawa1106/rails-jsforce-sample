@@ -14,6 +14,9 @@ class PagesController < ApplicationController
   def search
   end
 
+  def crud
+  end
+
   def analytics
   end
 
