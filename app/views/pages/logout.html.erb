@@ -1,0 +1,53 @@
+<% provide(:title, 'Search') %>
+
+<div class="query-page">
+  <!-- main -->
+  <div id="sb-site" class="main-color">
+    <%= render 'menu_header' %>
+
+    <div class="container">
+      <div style="margin-bottom: 20px;">
+        <h1 class="header-line">Salesforce Connection Logout</h1>
+        <button type="button" class="btn btn-primary" data-bind="click: clickLogoutBtn">Logout</button>
+      </div>
+    </div>
+  </div>
+  <!-- sidebar -->
+  <%= render 'sidebar' %>
+</div>
+
+<% content_for :scripts do %>
+<script type="text/javascript">
+
+  var conn = null;
+
+  $(document).ready(function(){
+    // Slidebar
+    $.slidebars();
+
+    jsforce.browser.on('connect', function(c) {
+      conn = c;
+    });
+  });
+
+  // View Model
+  function viewModel() {
+    var self = this;
+  
+    // LogoutBtn
+    self.clickLogoutBtn = function() {
+      conn.logout(function(err) {
+        if (err) {
+          swal('ERROR!', err, 'error');
+          return false;
+        }
+
+        swal('Logout!');
+      });
+    };
+  };
+
+  // Model
+  ko.applyBindings(new viewModel());
+</script>
+<% end %>
