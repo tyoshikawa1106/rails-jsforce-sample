@@ -82,8 +82,8 @@
           if (rets[i].success) {
             swal('Create!', 'Created record id : ' + rets[i].id, 'success');
             self.listItems.push({
-               account_id: res.records[i].Id
-              ,account_name: res.records[i].Name
+               account_id: rets.records[i].Id
+              ,account_name: rets.records[i].Name
               ,account_number: ''
             });
             return false;
