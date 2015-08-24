@@ -81,6 +81,11 @@
         for (var i=0; i < rets.length; i++) {
           if (rets[i].success) {
             swal('Create!', 'Created record id : ' + rets[i].id, 'success');
+            self.listItems.push({
+               account_id: res.records[i].Id
+              ,account_name: res.records[i].Name
+              ,account_number: ''
+            });
             return false;
           }
         }
@@ -105,7 +110,7 @@
              account_id: res.records[i].Id
             ,account_name: res.records[i].Name
             ,account_number: res.records[i].AccountNumber
-          });  
+          });
         }
 
         ko.applyBindings(viewModel);
@@ -113,15 +118,14 @@
 
       // DeleteBtn
       self.clickDeleteBtn = function(record) {
-        console.log(record);
         // Single record deletion
         conn.sobject("Account").destroy(record.account_id, function(err, ret) {
           if (err || !ret.success) {
             swal('ERROR!', err, 'error');
             return false;
           }
-          console.log('Deleted Successfully : ' + ret.id);
-          self.listItems.remove(this);
+          swal('Delete!', 'Deleted Successfully : ' + ret.id, 'success');
+          self.listItems.remove(record);
         });
       }
     };
