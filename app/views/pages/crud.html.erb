@@ -61,7 +61,7 @@
     self.input_account_name = '';
     self.listItems = ko.observableArray([]);
     // 初回検索
-    doAccountSearch();
+    doAccountSearch(conn);
 
 
     // CreateBtn
@@ -86,7 +86,7 @@
     };
   
     // SearchBtn
-    function doAccountSearch() {
+    function doAccountSearch(conn) {
       self.listItems.removeAll();
       var query = 'SELECT Id,Name,AccountNumber FROM Account';
       query += ' ORDER BY Name ASC';
