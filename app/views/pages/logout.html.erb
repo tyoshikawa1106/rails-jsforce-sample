@@ -8,7 +8,7 @@
     <div class="container">
       <div style="margin-bottom: 20px;">
         <h1 class="header-line">Salesforce Connection Logout</h1>
-        <button type="button" class="btn btn-primary" onclick="if(confirm('Logout ?'))jsforce.browser.logout()">Logout</button>
+        <button type="button" class="btn btn-primary" onclick="return logout();">Logout</button>
       </div>
     </div>
   </div>
@@ -29,5 +29,14 @@
       conn = c;
     });
   });
+
+  function logout() {
+    if(confirm('Logout ?')) {
+      jsforce.browser.logout();
+      location.href = "https://tyoshikwa1106-jsforce-sample.herokuapp.com/";
+    }
+
+    return false;
+  }
 </script>
 <% end %>
