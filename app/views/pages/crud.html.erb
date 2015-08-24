@@ -121,8 +121,8 @@
             return false;
           }
           console.log('Deleted Successfully : ' + ret.id);
+          self.listItems.remove(this);
         });
-        swal('Delete!');
       }
     };
 
