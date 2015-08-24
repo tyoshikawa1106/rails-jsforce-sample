@@ -15,7 +15,6 @@
           </div>
         </fieldset>        
         <button type="button" class="btn btn-primary" data-bind="click: clickCreateBtn">Create</button>
-        <button type="button" class="btn btn-primary" data-bind="click: clickSearchBtn">Search</button>
       </div>
 
       <table class="table table-hover">
@@ -61,14 +60,12 @@
     var self = this;
     self.input_account_name = '';
     self.listItems = ko.observableArray([]);
+    // 初回検索
+    doAccountSearch();
 
 
     // CreateBtn
     self.clickCreateBtn = function() {
-
-      if (!self.input_account_name) {
-        swal('Warning', 'Please Account Name...', 'warning');
-      }
 
       // Multiple records creation
       conn.sobject('Account').create([
@@ -89,7 +86,7 @@
     };
   
     // SearchBtn
-    self.clickSearchBtn = function() {
+    function doAccountSearch() {
       self.listItems.removeAll();
       var query = 'SELECT Id,Name,AccountNumber FROM Account';
       query += ' ORDER BY Name ASC';
@@ -111,7 +108,6 @@
         ko.applyBindings(viewModel);
       });
     };
-
   };
 
   // Model
