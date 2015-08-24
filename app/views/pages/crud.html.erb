@@ -81,7 +81,6 @@
         for (var i=0; i < rets.length; i++) {
           if (rets[i].success) {
             swal('Create!', 'Created record id : ' + rets[i].id, 'success');
-            console.log(rets[i]);
 
             // Single record retrieval
             conn.sobject("Account").retrieve(rets[i].id, function(err, account) {
@@ -90,8 +89,6 @@
                 return false;
               }
 
-              console.log(account);
-
               self.listItems.push({
                  account_id: account.id
                 ,account_name: account.Name
@@ -99,8 +96,6 @@
               });
             });
           }
-
-          ko.applyBindings(viewModel);
         }
       });
     };
@@ -142,7 +137,6 @@
         });
       }
     };
-
   };
 
   // Model
