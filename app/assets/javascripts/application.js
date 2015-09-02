@@ -14,3 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require jsforce/jsforce.min.js
+//= require bootstrap-sf1/js/docs.js
+//= require knockoutjs/knockout-3.3.0.js
+//= require slidebars/slidebars.min.js
+//= require sweetalert/sweetalert.min.js
